@@ -21,7 +21,8 @@
 
 // How many NeoPixels are attached to the Arduino?
 #define LED_COUNT 16
-#define mood 8
+int mood = 0;
+
 
 // Declare our NeoPixel strip object:
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -44,7 +45,7 @@ void setup() {
   clock_prescale_set(clock_div_1);
 #endif
   // END of Trinket-specific code.
-
+  Serial.begin(9600);
   strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
   strip.show();            // Turn OFF all pixels ASAP
   strip.setBrightness(50); // Set BRIGHTNESS to about 1/5 (max = 255)
@@ -55,6 +56,10 @@ void setup() {
 
 void loop() {
   // Fill along the length of the strip in various colors...
+    while (Serial.available() == 0){   
+    mood = Serial.parseInt();
+    }
+//  mood = Serial.parseInt();
   switch (mood){
     //base mode
      case 0: colorWipe(strip.Color(100,   0,  255), 25); // Light Purple 
@@ -86,8 +91,9 @@ void loop() {
      case 8: colorWipe(strip.Color(200,   20,  0), 0); //orange
      break;
      case 9: theaterChaseRainbow(50);
+     break;
   }
-
+ Serial.available();
   // Do a theater marquee effect in various colors...
   //theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
   //theaterChase(strip.Color(127,   0,   0), 50); // Red, half brightness
