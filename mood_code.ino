@@ -56,16 +56,17 @@ void setup() {
 
 void loop() {
   // Fill along the length of the strip in various colors...
-    while (Serial.available() == 0){   
-    mood = Serial.parseInt();
-    }
-//  mood = Serial.parseInt();
+//    while (Serial.available() == 0){   
+//    mood = Serial.parseInt();
+//    }
+  mood = Serial.parseInt();
   switch (mood){
     //base mode
      case 0: colorWipe(strip.Color(100,   0,  255), 25); // Light Purple 
      break;
     // calm mode
      case 1: colorWipe(strip.Color(0,   153,  25), 50); // green
+             delay(5000);
      break;
     // wake up
      case 2: colorWipe(strip.Color(255,   20,  20), 100); // pink
@@ -73,27 +74,32 @@ void loop() {
      break;
     // stimulate mode
      case 3: colorWipe(strip.Color(255,   0,  0), 100); //red
+             delay(5000);
      break;
     // meditation mode
      case 4: brighten(); // blue-green
-     darken();
+             darken();
      break;
     // focus mode
      case 5: colorWipe(strip.Color(77,   136,  255), 50); //light blue
+             delay(5000);
      break;
     // sad mode 
      case 6: colorWipe(strip.Color(0,   42,  255), 50); //blue
+             delay(5000);
      break;
     // cheer up mode
      case 7: colorWipe(strip.Color(255,   180,  19), 50); //yellow
+             delay(5000);
      break;
     // sleep mode
      case 8: colorWipe(strip.Color(200,   20,  0), 0); //orange
+             delay(5000);
      break;
      case 9: theaterChaseRainbow(50);
      break;
+     delay(10000);
   }
- Serial.available();
   // Do a theater marquee effect in various colors...
   //theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
   //theaterChase(strip.Color(127,   0,   0), 50); // Red, half brightness
@@ -102,7 +108,6 @@ void loop() {
   //rainbow(10);             // Flowing rainbow cycle along the whole strip
   //theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
 }
-
 
 // Some functions of our own for creating animated effects -----------------
 
